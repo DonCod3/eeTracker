@@ -25,8 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 // });
 
 
-db.connect (err => {
+db.connect(err => {
     if(err) throw err;
+    console.log(`Connected on port ${PORT}!`);
 });
 
 

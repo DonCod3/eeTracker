@@ -14,9 +14,9 @@ const db = mysql.createConnection(
         host: "localhost",
         user: "root",
         password: "Super98!",
-        database: "eeTracker"
+        // database: "employee_tracker"
     },
-    console.log("connected to the eTracker database")
+    console.log("connected to the eeTracker database")
 );
 
 module.exports = db
