@@ -1,4 +1,4 @@
 USE employee_tracker;
-INSERT INTO department(dept_name) VALUES ("HR"), ("ADMIN");
-INSERT INTO role(title, salary, department_id) VALUES ("HR manager", 50000, 1), ("Administrator", 45000, 2);
-INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("JEFF", "SATURDAY", 1, NULL), ("Alex", "Smith", 2, 1);
+INSERT INTO department(dept_name) VALUES ("Human Resources"), ("Admin"), ("Engineering"), ("Finance");
+INSERT INTO role(title, salary, department_id) VALUES ("HR Manager", 80000, 1), ("Lead Administrator", 91000, 2), ("Senior Systems Engineer", 175000, 3), ("Senior Economist", 210000, 4), ("HR Assistant", 65000, 1), ("Junior Administrator", 70000, 2), ("Junior Full-Stack Engineer", 125000, 3), ("Economic Research Analyst", 95000, 4), ("HR Analyst", 77000, 1),("Administrative Assistant", 55000, 2),("Associate Software Engineer", 90000, 3),("Economist", 116000, 4), ;
+INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("Jeff", "Saturday", 1, NULL), ("Laura", "Alexander", 2, NULL), ("Josh", "Rollins", 3, NULL),("Alex", "Smith", 4, NULL), ("Jessie", "Rosenthol", 1, 1), ("Emanuel", "Garcia", 2, 1), ("Martha", "Pain", 3, 1), ("Jean", "Ngoc", 4, 1), ("Sam", "Iam", 1, 2);

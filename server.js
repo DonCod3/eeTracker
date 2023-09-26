@@ -3,11 +3,11 @@ const inquirer = require("inquirer");
 // const { getEmployee, addEmployee, deleteEmployee } = require("./routes/employee");
 // const { getRoles, addRole, deleteRole } = require("./routes/role");
 
-// const seq = require('./config/connection');
+//establish connection to mySQL
 const db = require("./config/connection");
 
 
-//CLI prompts
+//////////////////                                              CLI prompts/questions
 const prompt = () => {
     inquirer.prompt([
         {
@@ -16,7 +16,7 @@ const prompt = () => {
             message: "Select a category:",
             choices: ["Departments", "Roles", "Employees", "Exit"]
         },
-        //Dept. Prompts
+ //Dept. Prompts
         {
             type: "list",
             name: "command",
@@ -34,7 +34,7 @@ const prompt = () => {
                 }
             }
         },
-        //Role Prompts
+ //Role Prompts
         {
             type: "list",
             name: "command",
@@ -52,7 +52,7 @@ const prompt = () => {
                 }
             }
         },
-        //EE Prompts
+//EE Prompts
         {
             type: "list",
             name: "command",
@@ -90,12 +90,18 @@ const prompt = () => {
             case "Add a role":
                 addRole()
                 break;
+            
+            case "Add an employee":
+                addEmployee()
+                break;
 
             default: process.exit()
         }
     })
 };
 
+
+///     VIEW ALL
 const viewDepartments = () => {
     db.promise().query("SELECT dept_name FROM department").then(([res]) => {
         console.table(res)
@@ -117,6 +123,8 @@ const viewEmployee = () => {
     })
 };
 
+
+///     ADDITION
 const addRole = async() => {
     const [Departments] = await db.promise().query("SELECT * FROM department")
     const departmentArray = Departments.map(department => (
@@ -156,6 +164,61 @@ const addRole = async() => {
         })
     })
 }
+
+const addEmployee = async() => {
+    const [Roles] = await db.promise().query("SELECT * FROM role")
+    const roleArrray = Roles.map(role => (
+        {
+            name: role.title,
+            value: role.id
+        }
+    ))
+
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "enter the employee's first name"
+        },
+        {
+            type: "input",
+            name: "last_name",
+            message: "enter the employee's last name"
+        },
+        {
+            type: "list",
+            name: "role_id",
+            choices: roleArrray,
+            message: "select a role for the employee"
+        }
+    ]).then(({
+        first_name, last_name, role_id
+    }) => {
+        db.promise().query("INSERT INTO employee SET ?", {first_name, last_name, role_id} ).then(([res]) => {
+            if(res.affectedRows >= 1) {
+                viewEmployee()
+            } else {
+                console.log("failed to add employee")
+                prompt()
+            }
+        })
+    })
+}
+
+// const addDepartment = async() => {
+//     const []
+
+//     inquirer.prompt([
+//         {
+//             type: "input",
+//             name: "department_name",
+//             message: "enter a new for the new department"
+//         },
+//         {
+//             type: 
+//         }
+//     ])
+// }
 
 //Dept user input prompts
 deptPrompt = data => {

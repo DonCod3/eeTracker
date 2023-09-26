@@ -2,10 +2,6 @@ DROP DATABASE IF EXISTS employee_tracker;
 CREATE DATABASE employee_tracker;
 USE employee_tracker;
 
--- DROP TABLE IF EXISTS department;
--- DROP TABLE IF EXISTS role;
--- DROP TABLE IF EXISTS employee;
-
 CREATE TABLE department (
     id INT PRIMARY KEY AUTO_INCREMENT,
     dept_name VARCHAR(30) NOT NULL
@@ -28,3 +24,4 @@ CREATE TABLE employee (
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE,
     CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE CASCADE
 );
+
